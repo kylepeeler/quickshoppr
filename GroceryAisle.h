@@ -11,24 +11,31 @@
 class GroceryAisle {
 private:
     int aisleNum;
-    std::string categories[];
+    int numCategories;
+    std::string* categories;
 public:
     //constructor
     GroceryAisle();
     //constructor with aisle number
     GroceryAisle(int aisleNum);
+    //constructor with aisle number and number of categories
+    GroceryAisle(int aisleNum, int numberOfCategories);
     //copy constructor
     GroceryAisle(const GroceryAisle &orig);
     //destructor
     ~GroceryAisle();
     //aisleNum setters/getters
     void setAisleNum(int aisleNum);
-    int getAisleNum();
+    int getAisleNum() const;
+    //number of categories getter/setter
+    void setNumCategories(int numCategories);
+    int getNumCategories() const;
     //category getter/"setter"
     bool addCategory(std::string category);//returns false if the category already exists, true if successful
     bool removeCategory(std::string category);//returns false if category is not found, true if the category was removed successfully
     std::string* getCategories();
-    int getNumItems();
+    bool hasCategory(std::string category);//returns true if contains category, if it doesn't returns false
+    std::string toString();
 };
 
 

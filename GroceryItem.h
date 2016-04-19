@@ -13,6 +13,7 @@ private:
     std::string name;
     std::string category;
     bool completed;
+    int aisleNum;
 
 public:
     //null constructor
@@ -31,11 +32,16 @@ public:
     //category getters/setters
     std::string getCategory() const;
     void setCategory(std::string category);
+    //aisle number setters/getters
+    int getAisleNumber()const;
+    void setAisleNumber(int aisle);
+    std::string getAisleNumberStr() const;
     //completion status getters/setters
     bool isCompleted() const;
     void setCompletionStatus(bool completionStatus);
+    std::string getCompletionStatusStr() const;
     void completeItem();
-
+    std::string toString();
 };
 
 
