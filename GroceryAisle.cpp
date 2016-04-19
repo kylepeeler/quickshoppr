@@ -47,6 +47,7 @@ GroceryAisle::GroceryAisle(const GroceryAisle &original){
 }
 
 GroceryAisle::~GroceryAisle() {
+    cout << "Deleting: " << this->toString() << endl;
     delete[] this->categories;
 }
 
@@ -85,6 +86,9 @@ bool GroceryAisle::addCategory(string category) {
         //now assign the new category
         tmpCategories[numCategories] = category;
         //delete the old categories pointer
+//        for (int i = 0; i < numCategories; i++){
+//            cout << "Aisle#" << this->getAisleNum() << " Old Categories[" << i << "]: " << this->categories[i] << endl;
+//        }
         delete[] categories;
         this->categories = tmpCategories;
         this->numCategories++;
@@ -150,10 +154,10 @@ string* GroceryAisle::getCategories(){
 }
 
 string GroceryAisle::toString() {
-    string output = "Aisle[" + to_string(this->getAisleNum()) + "], Categories(" + to_string(numCategories) + "): ";
+    string output = "Aisle[" + to_string(this->getAisleNum() + 1) + "], Categories(" + to_string(numCategories) + "): ";
     //loop through categories and concatinate it to output
     for (int i = 0; i < this->numCategories; i++){
-        //concatinate the string to aisle
+        //concatenate the string to aisle
         output += this->categories[i] + ", ";
 
     }

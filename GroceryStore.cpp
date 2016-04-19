@@ -2,6 +2,7 @@
 // Created by kpeel on 4/13/2016.
 //
 
+#include <iostream>
 #include "GroceryStore.h"
 
 using namespace std;
@@ -47,7 +48,7 @@ GroceryAisle* GroceryStore::getAisles(){
 }
 
 GroceryAisle* GroceryStore::getAisle(int index){
-    return &this->aisles[index];
+    return &this->aisles[index - 1];
 }
 
 int GroceryStore::lookupAisleByCategory(string category){
@@ -81,13 +82,16 @@ string GroceryStore::toString() {
     output = "Store Name: " + this->getStoreName() + "\n";
     output += "Number of Aisles: " + to_string(this->getNumAisles()) + "\n";
     output += "Aisle Data: \n";
+    int numberOfCategories = 0;
     //get number of aisles in the store
     int numberOfAisles = this->numAisles;
     //loop through all of the aisles
     for (int i = 0; i < numberOfAisles; i++){
         output += this->aisles[i].toString() + "\n";
+        numberOfCategories += this->aisles[i].getNumCategories();
     }
     //return the whole string
+    cout << "Number of Categories: " << numberOfCategories << endl;
     return output;
 }
 
