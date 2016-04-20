@@ -32,6 +32,8 @@ public:
     GroceryAisle* getAisle(int index);
     int lookupAisleByCategory(std::string category);
     bool assignCategoryToAisle(std::string category, int aisleNum);
+    int getNumAllCategories();
+    std::string* getAllCategories();
     std::string toString();
 };
 

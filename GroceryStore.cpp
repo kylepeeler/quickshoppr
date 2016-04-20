@@ -55,8 +55,10 @@ int GroceryStore::lookupAisleByCategory(string category){
     //if we can't find the aisle number, return -1
     int aisleNumber = -1;
     //iterate through all of the aisle numbers
-    for (int i = 0; i < this->getNumAisles(); i++){
+    //aisle numbers start from 1
+    for (int i = 1; i <= this->getNumAisles(); i++){
         GroceryAisle* aisleToSearch = this->getAisle(i);
+        //cout << "searching aisle: " << this->getAisle(i)->toString() << endl;
         //get number of categories in aisle to search
         int numOfCategoriesInAisle = aisleToSearch->getNumCategories();
         //get the categories array from the aisle to search
@@ -64,8 +66,9 @@ int GroceryStore::lookupAisleByCategory(string category){
         //iterate through the categories and compare to parameter
         for (int j = 0; j < numOfCategoriesInAisle; j++){
             //if we found a match, report back the aisle number
-            if (category.compare(categoriesInAisle[j])){
+            if (category.compare(categoriesInAisle[j]) == 0){
                 aisleNumber = i;
+                //return to stop searching
                 return aisleNumber;
             }
         }
@@ -87,11 +90,73 @@ string GroceryStore::toString() {
     int numberOfAisles = this->numAisles;
     //loop through all of the aisles
     for (int i = 0; i < numberOfAisles; i++){
-        output += this->aisles[i].toString() + "\n";
-        numberOfCategories += this->aisles[i].getNumCategories();
+        if (!this->aisles[i].isAisleEmpty()){
+            output += this->aisles[i].toString() + "\n";
+            numberOfCategories += this->aisles[i].getNumCategories();
+        }else{
+            output += "Aisle[" + to_string(i+1) + "]: is empty\n";
+        }
     }
     //return the whole string
     cout << "Number of Categories: " << numberOfCategories << endl;
     return output;
 }
+
+string* GroceryStore::getAllCategories() {
+    int numberOfCategories = 0;
+    //get number of aisles in the store
+    int numberOfAisles = this->numAisles;
+    //loop through all of the aisles
+    for (int i = 0; i < numberOfAisles; i++){
+        if (!this->aisles[i].isAisleEmpty()){
+            numberOfCategories += this->aisles[i].getNumCategories();
+        }
+    }
+    //allocate the categories array
+    string* allCategories = new string[numberOfCategories];
+    int allCategoriesIndex = 0;
+    //loop through all of the aisles
+    for (int i = 0; i < numberOfAisles; i++){
+        if (!this->aisles[i].isAisleEmpty()){
+            string * aisleCategories = this->aisles[i].getCategories();
+            //store number of categories in the aisle
+            int numCategoriesInAisle = this->aisles[i].getNumCategories();
+            for (int j = 0; j < numCategoriesInAisle; j++){
+                allCategories[allCategoriesIndex] = aisleCategories[j];
+                allCategoriesIndex++;
+            }
+        }
+    }
+//    //sort the list of all categories in alphabetical order using bubble sort
+//    for (int i = 0; i < numberOfCategories; i++){
+//        for (int k = 0; k < numberOfCategories; k++){
+//            if (strcmp(allCategories[i].c_str(), allCategories[k].c_str()) < 0){
+//                string tmp = allCategories[i];
+//                allCategories[i] = allCategories[k];
+//                allCategories[k] = tmp;
+//            }
+//        }
+//    }
+    return allCategories;
+}
+
+int GroceryStore::getNumAllCategories() {
+    int numberOfCategories = 0;
+    //get the number of aisles in the store
+    int numberOfAisles = this->numAisles;
+    //loop through all of the aisles
+    for (int i = 0; i < numberOfAisles; i++){
+        //if the category isn't empty, add the count of categories to the total
+        if (!this->aisles[i].isAisleEmpty()){
+            numberOfCategories += this->aisles[i].getNumCategories();
+        }
+    }
+    return numberOfCategories;
+}
+
+
+
+
+
+
 

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int getNumberAisles(string fileName){
+int parseNumAisles(string fileName){
     int maxAisleNumber = -1;
     //create the input file stream
     ifstream inFile;
@@ -58,7 +58,7 @@ int getNumberAisles(string fileName){
     return maxAisleNumber;
 }
 
-string getStoreName(string fileName){
+string parseStoreName(string fileName){
     string storeName = "Unknown";
     //create the input file stream
     ifstream inFile;
@@ -85,7 +85,7 @@ string getStoreName(string fileName){
 
 GroceryStore* loadStoreFromFile(string fileName){
     //create the store
-    GroceryStore* store = new GroceryStore(getStoreName(fileName), getNumberAisles(fileName));
+    GroceryStore* store = new GroceryStore(parseStoreName(fileName), parseNumAisles(fileName));
     //iterate through all of the aisles and add each category
     //create the input file stream
     ifstream inFile;
@@ -121,9 +121,10 @@ GroceryStore* loadStoreFromFile(string fileName){
                 converter >> parsedAisleNumber;
                 if (converter.fail()){
                     //we encountered a non-number aisle
+                    cout << "We found non-numbered aisle: " << aisleNum << endl;
                 }else{
                     //cout << "Accessing parsedAisleNumber: " << parsedAisleNumber << endl;
-                    store->getAisle(parsedAisleNumber)->addCategory(category);
+                    store->assignCategoryToAisle(category, parsedAisleNumber);
                 }
             }
         }
@@ -135,10 +136,58 @@ GroceryStore* loadStoreFromFile(string fileName){
     return store;
 }
 
+void swapStr(string* val1, string* val2){
+    string temp = *val1;
+    *val1 = *val2;
+    *val2 = temp;
+}
+
+int partition(string* array, int startIndex, int endIndex) {
+    string pivot = array[endIndex];
+    int pIndex = startIndex;
+    for (int i = startIndex; i < endIndex; i++){
+        if (array[i] <= pivot){
+            swapStr(&array[i], &array[pIndex]);
+            pIndex += 1;
+        }
+    }
+    swapStr(&array[pIndex], &array[endIndex]);
+    return pIndex;
+}
+
+void quickSort(string* array, int startIndex, int endIndex){
+    if (startIndex < endIndex){
+        int pivot = partition(array, startIndex, endIndex);
+        quickSort(array, startIndex, pivot - 1);
+        quickSort(array, pivot + 1, endIndex);
+    }
+}
+
+
 int main() {
     cout << "Grocery Store Test" << endl;
     cout << "-------------" << endl;
     GroceryStore* store = loadStoreFromFile("stores/Marsh.qss");
+//    cout << store->toString() << endl;
+//    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
+//    int aisleNumWithTea = store->lookupAisleByCategory("Tea");
+//    cout << "Removing 'Tea' in aisle: " << aisleNumWithTea << "......";
+//    cout << store->getAisle(aisleNumWithTea)->removeCategory("Tea") << endl;
+//    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
+    cout << "Aisle 1 empty? " << store->getAisle(1)->isAisleEmpty() << endl;
+    cout << "Aisle 1 number:" << store->getAisle(1)->getAisleNum() << endl;
+    string * allCategories = store->getAllCategories();
+    cout << " Pre-sorted Listing Categories: " << endl;
+    cout << "Number of All Categories: " << store->getNumAllCategories() << endl;
+    for (int i = 0; i < store->getNumAllCategories(); i++){
+        cout << "Category[" << i << "]: " << allCategories[i] << endl;
+    }
+    quickSort(allCategories, 0, (store->getNumAllCategories() - 1));
+    cout << " Post-sorted Listing Categories: " << endl;
+    cout << "Number of All Categories: " << store->getNumAllCategories() << endl;
+    for (int i = 0; i < store->getNumAllCategories(); i++){
+        cout << "Category[" << i << "]: " << allCategories[i] << endl;
+    }
     cout << store->toString() << endl;
     return 0;
 }

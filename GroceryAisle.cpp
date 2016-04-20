@@ -13,6 +13,7 @@ GroceryAisle::GroceryAisle() {
     this->setNumCategories(0);
     //allocate it?
     categories = new string[0];
+    this->isEmpty = true;
 }
 
 GroceryAisle::GroceryAisle(int aisleNum) {
@@ -22,6 +23,7 @@ GroceryAisle::GroceryAisle(int aisleNum) {
     this->setNumCategories(0);
     //allocate array of category strings
     categories = new string[0];
+    this->isEmpty = true;
 }
 
 GroceryAisle::GroceryAisle(int aisleNum, int numberOfCategories){
@@ -31,6 +33,7 @@ GroceryAisle::GroceryAisle(int aisleNum, int numberOfCategories){
     this->setNumCategories(numberOfCategories);
     //allocate the category array
     categories = new string[numberOfCategories];
+    this->isEmpty = false;
 }
 
 GroceryAisle::GroceryAisle(const GroceryAisle &original){
@@ -44,6 +47,7 @@ GroceryAisle::GroceryAisle(const GroceryAisle &original){
     for (int i = 0; i < this->getNumCategories(); i++){
         this->categories[i] = original.categories[i];
     }
+    this->isEmpty = original.isEmpty;
 }
 
 GroceryAisle::~GroceryAisle() {
@@ -54,9 +58,12 @@ GroceryAisle::~GroceryAisle() {
 void GroceryAisle::setAisleNum(int aisleNum) {
     this->aisleNum = aisleNum;
 }
-
-int GroceryAisle::getAisleNum() const {
+int GroceryAisle::getAisleIndex() const {
     return this->aisleNum;
+}
+//aisle number is index + 1
+int GroceryAisle::getAisleNum() const {
+    return this->aisleNum + 1;
 }
 
 void GroceryAisle::setNumCategories(int numCategories) {
@@ -68,6 +75,7 @@ int GroceryAisle::getNumCategories() const {
 }
 
 bool GroceryAisle::addCategory(string category) {
+    this->isEmpty = false;
     //get the size of the current number of categories
     int currentNumberCategories = numCategories;
     bool alreadyHaveCategory = false;
@@ -103,31 +111,27 @@ bool GroceryAisle::removeCategory(string category){
     int currentNumberCategories = this->getNumCategories();
     //-1 means we have not found the category
     int foundCategoryIndex = -1;
-    //did we find the category?
-    bool foundCategory = false;
-    //lets find the category
-    for (int i = 0; i < currentNumberCategories; i++){
-        if (this->categories[i].compare(category) == 0){
-            foundCategoryIndex = i;
-            foundCategory = true;
-        }
-    }
     //if we found the category, recreate the category array without it
-    if (foundCategory){
+    if (hasCategory(category)){
         //allocate a new string array of categories with size-1
         string * tempCategories = new string[currentNumberCategories - 1];
         //now we copy over up to the index of the foundCategory
+        //cout << "found category index: " << foundCategoryIndex << endl;
         for (int j = 0; j < foundCategoryIndex; j++){
             tempCategories[j] = this->categories[j];
         }
         //now we copy elements past the index of foundCategory
-        for (int k = foundCategoryIndex + 1; k < currentNumberCategories + 1; k++){
+        for (int k = foundCategoryIndex + 1; k < currentNumberCategories; k++){
             tempCategories[k - 1] = this->categories[k];
         }
         //free the old categories pointer
         delete[] categories;
+        this->categories = tempCategories;
         //decrease the number of categories
         this->setNumCategories(currentNumberCategories - 1);
+        if (getNumCategories() == 0){
+            this->isEmpty = true;
+        }
         return true;
     }else{
         return false;
@@ -154,12 +158,22 @@ string* GroceryAisle::getCategories(){
 }
 
 string GroceryAisle::toString() {
-    string output = "Aisle[" + to_string(this->getAisleNum() + 1) + "], Categories(" + to_string(numCategories) + "): ";
-    //loop through categories and concatinate it to output
-    for (int i = 0; i < this->numCategories; i++){
-        //concatenate the string to aisle
+    //the string
+    string output;
+    output = "Aisle[" + to_string(this->getAisleNum()) + "], Categories(" + to_string(this->getNumCategories()) + "): ";
+    //loop through categories and concatenate it to output
+    for (int i = 0; i < this->getNumCategories(); i++){
+        //concatenate the category to output string
         output += this->categories[i] + ", ";
 
     }
     return output;
+
 }
+
+bool GroceryAisle::isAisleEmpty() {
+    return this->isEmpty;
+}
+
+
+
