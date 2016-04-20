@@ -51,7 +51,7 @@ GroceryAisle::GroceryAisle(const GroceryAisle &original){
 }
 
 GroceryAisle::~GroceryAisle() {
-    cout << "Deleting: " << this->toString() << endl;
+    //cout << "Deleting: " << this->toString() << endl;
     delete[] this->categories;
 }
 
@@ -160,11 +160,15 @@ string* GroceryAisle::getCategories(){
 string GroceryAisle::toString() {
     //the string
     string output;
-    output = "Aisle[" + to_string(this->getAisleNum()) + "], Categories(" + to_string(this->getNumCategories()) + "): ";
+    output = "Aisle[" + to_string(this->getAisleNum()) + "]-> Categories(" + to_string(this->getNumCategories()) + "): ";
     //loop through categories and concatenate it to output
     for (int i = 0; i < this->getNumCategories(); i++){
         //concatenate the category to output string
-        output += this->categories[i] + ", ";
+        if (i != this->numCategories - 1){
+            output += this->categories[i] + ", ";
+        }else{
+            output += this->categories[i];
+        }
 
     }
     return output;

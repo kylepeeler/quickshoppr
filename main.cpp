@@ -142,7 +142,7 @@ void swapStr(string* val1, string* val2){
     *val2 = temp;
 }
 
-int partition(string* array, int startIndex, int endIndex) {
+int partitionStr(string *array, int startIndex, int endIndex) {
     string pivot = array[endIndex];
     int pIndex = startIndex;
     for (int i = startIndex; i < endIndex; i++){
@@ -155,11 +155,11 @@ int partition(string* array, int startIndex, int endIndex) {
     return pIndex;
 }
 
-void quickSort(string* array, int startIndex, int endIndex){
+void quickSortStr(string *array, int startIndex, int endIndex){
     if (startIndex < endIndex){
-        int pivot = partition(array, startIndex, endIndex);
-        quickSort(array, startIndex, pivot - 1);
-        quickSort(array, pivot + 1, endIndex);
+        int pivot = partitionStr(array, startIndex, endIndex);
+        quickSortStr(array, startIndex, pivot - 1);
+        quickSortStr(array, pivot + 1, endIndex);
     }
 }
 
@@ -174,20 +174,22 @@ int main() {
 //    cout << "Removing 'Tea' in aisle: " << aisleNumWithTea << "......";
 //    cout << store->getAisle(aisleNumWithTea)->removeCategory("Tea") << endl;
 //    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
-    cout << "Aisle 1 empty? " << store->getAisle(1)->isAisleEmpty() << endl;
-    cout << "Aisle 1 number:" << store->getAisle(1)->getAisleNum() << endl;
+//    cout << "Aisle 1 empty? " << store->getAisle(1)->isAisleEmpty() << endl;
+//    cout << "Aisle 1 number:" << store->getAisle(1)->getAisleNum() << endl;
+    //allocate the categories array on heap, make sure to free!!!
     string * allCategories = store->getAllCategories();
-    cout << " Pre-sorted Listing Categories: " << endl;
+    cout << " Unsorted Listing Categories: " << endl;
     cout << "Number of All Categories: " << store->getNumAllCategories() << endl;
     for (int i = 0; i < store->getNumAllCategories(); i++){
         cout << "Category[" << i << "]: " << allCategories[i] << endl;
     }
-    quickSort(allCategories, 0, (store->getNumAllCategories() - 1));
-    cout << " Post-sorted Listing Categories: " << endl;
+    quickSortStr(allCategories, 0, (store->getNumAllCategories() - 1));
+    cout << " QUICKSORTED Listing Categories: " << endl;
     cout << "Number of All Categories: " << store->getNumAllCategories() << endl;
     for (int i = 0; i < store->getNumAllCategories(); i++){
         cout << "Category[" << i << "]: " << allCategories[i] << endl;
     }
     cout << store->toString() << endl;
+    delete[] allCategories;
     return 0;
 }

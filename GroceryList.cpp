@@ -88,7 +88,7 @@ GroceryItem GroceryList::getItem(int index) {
 }
 
 void GroceryList::setStore(GroceryStore store) {
-    this->setStore(store);
+    this->store = store;
 }
 
 GroceryStore GroceryList::getGroceryStore() {

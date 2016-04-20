@@ -10,7 +10,7 @@ using namespace std;
 GroceryStore::GroceryStore(){
     this->setStoreName("Undefined Store");
     this->setNumAisles(0);
-    this->aisles = new GroceryAisle[this->getNumAisles()];
+    this->aisles = new GroceryAisle[numAisles];
 }
 
 GroceryStore::GroceryStore(std::string storeName, int numAisles){
@@ -39,8 +39,8 @@ int GroceryStore::getNumAisles(){
     return this->numAisles;
 }
 
-void GroceryStore::setNumAisles(int numIsles) {
-    this->numAisles = numIsles;
+void GroceryStore::setNumAisles(int numAisles) {
+    this->numAisles = numAisles;
 }
 
 GroceryAisle* GroceryStore::getAisles(){
@@ -94,7 +94,7 @@ string GroceryStore::toString() {
             output += this->aisles[i].toString() + "\n";
             numberOfCategories += this->aisles[i].getNumCategories();
         }else{
-            output += "Aisle[" + to_string(i+1) + "]: is empty\n";
+            output += "Aisle[" + to_string(i+1) + "]-> is empty!\n";
         }
     }
     //return the whole string
@@ -127,16 +127,6 @@ string* GroceryStore::getAllCategories() {
             }
         }
     }
-//    //sort the list of all categories in alphabetical order using bubble sort
-//    for (int i = 0; i < numberOfCategories; i++){
-//        for (int k = 0; k < numberOfCategories; k++){
-//            if (strcmp(allCategories[i].c_str(), allCategories[k].c_str()) < 0){
-//                string tmp = allCategories[i];
-//                allCategories[i] = allCategories[k];
-//                allCategories[k] = tmp;
-//            }
-//        }
-//    }
     return allCategories;
 }
 

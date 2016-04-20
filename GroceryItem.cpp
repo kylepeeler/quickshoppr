@@ -58,7 +58,7 @@ void GroceryItem::setCategory(std::string category) {
 
 
 void GroceryItem::completeItem() {
-    if (this->completed == false){
+    if (!this->completed){
         this->completed = true;
     }
 }
