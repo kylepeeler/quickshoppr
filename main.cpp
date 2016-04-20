@@ -2,8 +2,25 @@
 #include <fstream>
 #include <sstream>
 #include "GroceryStore.h"
+#include "GroceryList.h"
 
 using namespace std;
+
+void printAsciiHeader(){
+    string header =
+            "\n  /$$$$$$            /$$           /$$        /$$$$$$  /$$                                              \n"
+            " /$$__  $$          |__/          | $$       /$$__  $$| $$                                              \n"
+            "| $$  \\ $$ /$$   /$$ /$$  /$$$$$$$| $$   /$$| $$  \\__/| $$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$ \n"
+            "| $$  | $$| $$  | $$| $$ /$$_____/| $$  /$$/|  $$$$$$ | $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$\n"
+            "| $$  | $$| $$  | $$| $$| $$      | $$$$$$/  \\____  $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\__/\n"
+            "| $$/$$ $$| $$  | $$| $$| $$      | $$_  $$  /$$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$      \n"
+            "|  $$$$$$/|  $$$$$$/| $$|  $$$$$$$| $$ \\  $$|  $$$$$$/| $$  | $$|  $$$$$$/| $$$$$$$/| $$$$$$$/| $$      \n"
+            " \\____ $$$ \\______/ |__/ \\_______/|__/  \\__/ \\______/ |__/  |__/ \\______/ | $$____/ | $$____/ |__/      \n"
+            "      \\__/ v0.1  by Kyle Peeler                                           | $$      | $$                \n"
+            "                                                                          | $$      | $$                \n"
+            "                                                                          |__/      |__/                ";
+    cout << header << endl;
+}
 
 int parseNumAisles(string fileName){
     int maxAisleNumber = -1;
@@ -84,6 +101,7 @@ string parseStoreName(string fileName){
 }
 
 GroceryStore* loadStoreFromFile(string fileName){
+    cout << "Loading " << fileName << "..." << endl;
     //create the store
     GroceryStore* store = new GroceryStore(parseStoreName(fileName), parseNumAisles(fileName));
     //iterate through all of the aisles and add each category
@@ -121,7 +139,7 @@ GroceryStore* loadStoreFromFile(string fileName){
                 converter >> parsedAisleNumber;
                 if (converter.fail()){
                     //we encountered a non-number aisle
-                    cout << "We found non-numbered aisle: " << aisleNum << endl;
+                    //cout << "We found non-numbered aisle: " << aisleNum << endl;
                 }else{
                     //cout << "Accessing parsedAisleNumber: " << parsedAisleNumber << endl;
                     store->assignCategoryToAisle(category, parsedAisleNumber);
@@ -163,11 +181,60 @@ void quickSortStr(string *array, int startIndex, int endIndex){
     }
 }
 
+void assignAisles(GroceryList* list, GroceryStore* store){
+    int numberOfItems = list->getNumItems();
+    //iterate through all of the items
+    for (int i = 0; i < numberOfItems; i++){
+        string category = list->getItem(i)->getCategory();
+        list->getItem(i)->setAisleNumber(store->lookupAisleByCategory(category));
+    }
+}
+
+void printListAscendingAisles(GroceryList* list, GroceryStore* store){
+    int numStoreAisles = store->getNumAisles();
+    int numListItems = list->getNumItems();
+    //iterate through the store aisle to be printed
+    for (int i = 1; i <= numStoreAisles; i++){
+        //iterate through the list items
+        //check if the item at index j is equal to aisle i
+        if (!store->getAisle(i)->isAisleEmpty()){
+            for (int j = 0; j < numListItems; j++){
+                if (list->getItem(j)->getAisleNumber() == i) {
+                    cout << "Aisle [" << i << "]->" << list->getItem(j)->toString() << endl;
+                }
+            }
+        }
+    }
+    //now print the unknown location items
+    for (int j = 0; j < numListItems; j++){
+        if (list->getItem(j)->getAisleNumber() == -1){
+            cout << "Aisle [?]->" << list->getItem(j)->toString() << endl;
+        }
+    }
+    //iterate through all of the aisles in the store
+}
+
+int selectCategory(string* categories, int numberOfCategories){
+    int selectedIndex = -1;
+    while (selectedIndex == -1){
+        for (int i = 0; i < numberOfCategories; i++){
+            cout << "(" << i+1 << ")" << " " << categories[i] << endl;
+        }
+        cout << "What category does the item fall under? ";
+        cin >> selectedIndex;
+        //decrement as we are showing index + 1
+        selectedIndex--;
+        if (!(selectedIndex >= 0 && selectedIndex < numberOfCategories)){
+            selectedIndex = -1;
+        }
+    }
+	return selectedIndex;
+}
+
 
 int main() {
-    cout << "Grocery Store Test" << endl;
-    cout << "-------------" << endl;
-    GroceryStore* store = loadStoreFromFile("stores/Marsh.qss");
+    printAsciiHeader();
+    GroceryStore* store = loadStoreFromFile("stores/Kroger.qss");
 //    cout << store->toString() << endl;
 //    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
 //    int aisleNumWithTea = store->lookupAisleByCategory("Tea");
@@ -178,18 +245,25 @@ int main() {
 //    cout << "Aisle 1 number:" << store->getAisle(1)->getAisleNum() << endl;
     //allocate the categories array on heap, make sure to free!!!
     string * allCategories = store->getAllCategories();
-    cout << " Unsorted Listing Categories: " << endl;
-    cout << "Number of All Categories: " << store->getNumAllCategories() << endl;
-    for (int i = 0; i < store->getNumAllCategories(); i++){
-        cout << "Category[" << i << "]: " << allCategories[i] << endl;
-    }
+    //cout << " Unsorted Listing Categories: " << endl;
+    cout << "Number of Loaded Categories: " << store->getNumAllCategories() << endl;
+    cout << "Number of Loaded Aisles: " << store->getNumAisles() << endl;
     quickSortStr(allCategories, 0, (store->getNumAllCategories() - 1));
-    cout << " QUICKSORTED Listing Categories: " << endl;
-    cout << "Number of All Categories: " << store->getNumAllCategories() << endl;
-    for (int i = 0; i < store->getNumAllCategories(); i++){
-        cout << "Category[" << i << "]: " << allCategories[i] << endl;
-    }
-    cout << store->toString() << endl;
+//    cout << " QUICKSORTED Listing Categories: " << endl;
+//    for (int i = 0; i < store->getNumAllCategories(); i++){
+//        cout << "Category[" << i << "]: " << allCategories[i] << endl;
+//    }
+//    cout << store->toString() << endl;
+    GroceryList* list = new GroceryList(store);
+    list->addItem(GroceryItem("Tomato Soup", "Soups"));
+    list->addItem(GroceryItem("Sour Patch Kids", "Candy"));
+    list->addItem(GroceryItem("AA Batteries", "Batteries"));
+    list->addItem(GroceryItem("Pears", "Canned Fruits"));
+    list->getItem(0)->completeItem();
+    assignAisles(list, store);
+    cout << "Print Ascending Aisles: " << endl;
+    //cout << "Returned category number: " << selectCategory(allCategories, store->getNumAllCategories()) << endl;
     delete[] allCategories;
+    printListAscendingAisles(list, store);
     return 0;
 }

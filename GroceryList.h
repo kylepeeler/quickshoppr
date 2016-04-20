@@ -16,14 +16,14 @@ private:
     GroceryStore store;
 public:
     GroceryList();
-    GroceryList(GroceryStore store);
+    GroceryList(GroceryStore* store);
     ~GroceryList();
     int getNumItems();
     void setNumItems(int numItems);
     void addItem(GroceryItem item);
     void removeItem(int index);
-    GroceryItem getItem(int index);
-    void setStore(GroceryStore store);
+    GroceryItem* getItem(int index);
+    void setStore(GroceryStore* store);
     GroceryStore getGroceryStore();
     std::string toString();
 };

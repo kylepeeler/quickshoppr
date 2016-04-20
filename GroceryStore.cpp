@@ -98,7 +98,7 @@ string GroceryStore::toString() {
         }
     }
     //return the whole string
-    cout << "Number of Categories: " << numberOfCategories << endl;
+    //cout << "Number of Categories: " << numberOfCategories << endl;
     return output;
 }
 

@@ -14,7 +14,7 @@ GroceryList::GroceryList() {
     //store is unassigned, keep null
 }
 
-GroceryList::GroceryList(GroceryStore store) {
+GroceryList::GroceryList(GroceryStore* store) {
     this->setNumItems(0);
     //allocate items array
     items = new GroceryItem[this->getNumItems()];
@@ -63,17 +63,17 @@ void GroceryList::removeItem(int index) {
     GroceryItem* tempItems = new GroceryItem[this->getNumItems() - 1];
     //now we copy up to the index of the found category
     for (int i = 0; i < index; i++){
-        tempItems[i].setName(this->getItem(i).getName());
-        tempItems[i].setCategory(this->getItem(i).getCategory());
-        tempItems[i].setAisleNumber(this->getItem(i).getAisleNumber());
-        tempItems[i].setCompletionStatus(this->getItem(i).isCompleted());
+        tempItems[i].setName(this->getItem(i)->getName());
+        tempItems[i].setCategory(this->getItem(i)->getCategory());
+        tempItems[i].setAisleNumber(this->getItem(i)->getAisleNumber());
+        tempItems[i].setCompletionStatus(this->getItem(i)->isCompleted());
     }
     //now we copy past the index of the found item
     for (int k = index + 1; k < this->getNumItems(); k++){
-        tempItems[k - 1].setName(this->getItem(k).getName());
-        tempItems[k - 1].setAisleNumber(this->getItem(k).getAisleNumber());
-        tempItems[k - 1].setCategory(this->getItem(k).getCategory());
-        tempItems[k - 1].setCompletionStatus(this->getItem(k).isCompleted());
+        tempItems[k - 1].setName(this->getItem(k)->getName());
+        tempItems[k - 1].setAisleNumber(this->getItem(k)->getAisleNumber());
+        tempItems[k - 1].setCategory(this->getItem(k)->getCategory());
+        tempItems[k - 1].setCompletionStatus(this->getItem(k)->isCompleted());
     }
     //delete the old items pointer
     delete[] items;
@@ -83,12 +83,12 @@ void GroceryList::removeItem(int index) {
     this->setNumItems(this->getNumItems() - 1);
 }
 
-GroceryItem GroceryList::getItem(int index) {
-    return this->items[index];
+GroceryItem* GroceryList::getItem(int index) {
+    return &this->items[index];
 }
 
-void GroceryList::setStore(GroceryStore store) {
-    this->store = store;
+void GroceryList::setStore(GroceryStore* store) {
+    this->store = *store;
 }
 
 GroceryStore GroceryList::getGroceryStore() {
@@ -103,7 +103,7 @@ string GroceryList::toString() {
     output = "Number of Items: " + to_string(numItems) + "\n";
     output += "Store: " + this->getGroceryStore().toString() + "\n";
     for (int i = 0; i < numItems; i++){
-        output += "ListItem[" + std::to_string(i) + "]:" + this->getItem(i).toString() + "\n";
+        output += "ListItem[" + std::to_string(i) + "]:" + this->getItem(i)->toString() + "\n";
     }
     return output;
 }

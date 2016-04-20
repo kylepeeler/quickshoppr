@@ -18,6 +18,8 @@ private:
 public:
     //null constructor
     GroceryItem();
+    //overloaded constructor w/ aisle number
+    GroceryItem(std::string name, std::string category, int aisleNum);
     //overloaded constructor w/ parameters
     GroceryItem(std::string name, std::string category, bool completionStatus);
     //overloaded constructor w/out completion status - assumes false

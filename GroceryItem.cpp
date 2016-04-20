@@ -20,6 +20,13 @@ GroceryItem::GroceryItem(std::string name, std::string category, bool completion
     this->setAisleNumber(-1);
 }
 
+GroceryItem::GroceryItem(std::string name, std::string category, int aisleNum) {
+    this->setName(name);
+    this->setCategory(category);
+    this->setCompletionStatus(false);
+    this->setAisleNumber(aisleNum);
+}
+
 GroceryItem::GroceryItem(std::string name, std::string category) {
     this->setName(name);
     this->setCategory(category);
@@ -94,10 +101,7 @@ void GroceryItem::setAisleNumber(int aisle) {
 }
 
 std::string GroceryItem::toString() {
-    return "Grocery Item:" + this->getName() +
-            "| Category:" + this->getCategory() +
-            "| Aisle Number:" + this->getAisleNumberStr() +
-            "| Completion Status:" + this->getCompletionStatusStr();
+    return "Item:" + this->getName() + " (" + this->getCategory() + "): completed? " + this->getCompletionStatusStr();
 }
 
 
