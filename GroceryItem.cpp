@@ -101,7 +101,11 @@ void GroceryItem::setAisleNumber(int aisle) {
 }
 
 std::string GroceryItem::toString() {
-    return "Item:" + this->getName() + " (" + this->getCategory() + "): completed? " + this->getCompletionStatusStr();
+    if (this->isCompleted()){
+        return "Item: " + this->getName() + " (" + this->getCategory() + "): completed? \u2714";
+    }else{
+        return "Item: " + this->getName() + " (" + this->getCategory() + "): completed? \u2718";
+    }
 }
 
 

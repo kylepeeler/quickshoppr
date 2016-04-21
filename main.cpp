@@ -1,24 +1,28 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include "GroceryStore.h"
 #include "GroceryList.h"
 
 using namespace std;
 
 void printAsciiHeader(){
-    string header =
-            "\n  /$$$$$$            /$$           /$$        /$$$$$$  /$$                                              \n"
-            " /$$__  $$          |__/          | $$       /$$__  $$| $$                                              \n"
-            "| $$  \\ $$ /$$   /$$ /$$  /$$$$$$$| $$   /$$| $$  \\__/| $$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$ \n"
-            "| $$  | $$| $$  | $$| $$ /$$_____/| $$  /$$/|  $$$$$$ | $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$\n"
-            "| $$  | $$| $$  | $$| $$| $$      | $$$$$$/  \\____  $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\__/\n"
-            "| $$/$$ $$| $$  | $$| $$| $$      | $$_  $$  /$$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$      \n"
-            "|  $$$$$$/|  $$$$$$/| $$|  $$$$$$$| $$ \\  $$|  $$$$$$/| $$  | $$|  $$$$$$/| $$$$$$$/| $$$$$$$/| $$      \n"
-            " \\____ $$$ \\______/ |__/ \\_______/|__/  \\__/ \\______/ |__/  |__/ \\______/ | $$____/ | $$____/ |__/      \n"
-            "      \\__/ v0.1  by Kyle Peeler                                           | $$      | $$                \n"
-            "                                                                          | $$      | $$                \n"
-            "                                                                          |__/      |__/                ";
+    string header = "\nOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOo\n"
+            "8                                                                                                                8\n"
+            "8      /$$$$$$            /$$           /$$        /$$$$$$  /$$                                                  8\n"
+            "0     /$$__  $$          |__/          | $$       /$$__  $$| $$                                                  0\n"
+            "8    | $$  \\ $$ /$$   /$$ /$$  /$$$$$$$| $$   /$$| $$  \\__/| $$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$     8\n"
+            "0    | $$  | $$| $$  | $$| $$ /$$_____/| $$  /$$/|  $$$$$$ | $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$    0\n"
+            "8    | $$  | $$| $$  | $$| $$| $$      | $$$$$$/  \\____  $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\__/    8\n"
+            "0    | $$/$$ $$| $$  | $$| $$| $$      | $$_  $$  /$$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$          0\n"
+            "8    |  $$$$$$/|  $$$$$$/| $$|  $$$$$$$| $$ \\  $$|  $$$$$$/| $$  | $$|  $$$$$$/| $$$$$$$/| $$$$$$$/| $$          8\n"
+            "0     \\____ $$$ \\______/ |__/ \\_______/|__/  \\__/ \\______/ |__/  |__/ \\______/ | $$____/ | $$____/ |__/          0\n"
+            "8          \\__/                                                                | $$      | $$                    8\n"
+            "0                     v0.1  by Kyle Peeler                                     | $$      | $$                    0\n"
+            "8                                                                              |__/      |__/                    8\n"
+            "0                                                                                                                0\n"
+            "OoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo0OoOoOoOo\n";
     cout << header << endl;
 }
 
@@ -220,7 +224,7 @@ int selectCategory(string* categories, int numberOfCategories){
         for (int i = 0; i < numberOfCategories; i++){
             cout << "(" << i+1 << ")" << " " << categories[i] << endl;
         }
-        cout << "What category does the item fall under? ";
+        cout << "Select a category for the item : ";
         cin >> selectedIndex;
         //decrement as we are showing index + 1
         selectedIndex--;
@@ -232,9 +236,23 @@ int selectCategory(string* categories, int numberOfCategories){
 }
 
 
+void addItemToList(GroceryList* list, GroceryStore* store, string* categories){
+    GroceryItem itemToAdd;
+    string itemName;
+    cout << "\nWhat is the name of the item? : ";
+    std::getline(cin, itemName);
+    std::getline(cin, itemName);
+
+    int catIndex = selectCategory(categories, store->getNumAllCategories());
+    itemToAdd.setName(itemName);
+    itemToAdd.setCategory(categories[catIndex]);
+    list->addItem(itemToAdd);
+}
+
+
 int main() {
-    printAsciiHeader();
-    GroceryStore* store = loadStoreFromFile("stores/Kroger.qss");
+    GroceryStore* store = loadStoreFromFile("stores/Marsh.qss");
+    GroceryList* list = new GroceryList(store);
 //    cout << store->toString() << endl;
 //    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
 //    int aisleNumWithTea = store->lookupAisleByCategory("Tea");
@@ -246,24 +264,71 @@ int main() {
     //allocate the categories array on heap, make sure to free!!!
     string * allCategories = store->getAllCategories();
     //cout << " Unsorted Listing Categories: " << endl;
-    cout << "Number of Loaded Categories: " << store->getNumAllCategories() << endl;
-    cout << "Number of Loaded Aisles: " << store->getNumAisles() << endl;
     quickSortStr(allCategories, 0, (store->getNumAllCategories() - 1));
+
+    //save the user's entered menu option
+    string userMenuOption;
+    do {
+        printAsciiHeader();
+        cout << "Loaded Store Name: " << store->getStoreName() << endl;
+        cout << "Number of Loaded Categories: " << store->getNumAllCategories() << endl;
+        cout << "Number of Loaded Aisles: " << store->getNumAisles() << endl;
+        if (list->getNumItems() != 0){
+            cout << "\nGROCERY LIST BY AISLE" << endl;
+            cout << "------------------------" << endl;
+            printListAscendingAisles(list, store);
+            cout << "------------------------\n" << endl;
+        }else{
+            cout << "\n[Grocery List is Empty!]" << endl;
+        }
+        //do-while loop, display the menu atleast once
+        cout << "\nWhat would you like to do?" << endl;
+        cout << "1) Add Grocery Item to list" << endl;
+        cout << "2) Remove Grocery Item to list" << endl;
+        cout << "3) Change stores" << endl;
+        cout << "4) Shopping mode" << endl;
+        cout << "5) Exit\n" << endl;
+        //prompt user to enter an option according to menu
+        cout << "Please select an option : ";
+        //clean out cin to remove previous values
+        cin.clear();
+        cin >> userMenuOption; //take option value as input and save it
+        if (cin.good()){
+            if (userMenuOption == "1"){
+                //add grocery item to list
+                addItemToList(list, store, allCategories);
+                assignAisles(list, store);
+            }else if(userMenuOption == "2"){
+                //remove grocery item from list
+            }else if(userMenuOption == "3"){
+                //change stores
+            }else if(userMenuOption == "4"){
+                //shopping mode
+            }else if(userMenuOption == "5"){
+                cout << "Terminating..." << endl;
+            }else{
+                cout << "Invalid Option Entered, Try Again!" << endl;
+            }
+        }else{
+            cout << "Invalid Option Entered, Try Again!" << endl;
+        }
+    }while (userMenuOption != "5");
+
+
+
+
 //    cout << " QUICKSORTED Listing Categories: " << endl;
 //    for (int i = 0; i < store->getNumAllCategories(); i++){
 //        cout << "Category[" << i << "]: " << allCategories[i] << endl;
 //    }
 //    cout << store->toString() << endl;
-    GroceryList* list = new GroceryList(store);
-    list->addItem(GroceryItem("Tomato Soup", "Soups"));
-    list->addItem(GroceryItem("Sour Patch Kids", "Candy"));
-    list->addItem(GroceryItem("AA Batteries", "Batteries"));
-    list->addItem(GroceryItem("Pears", "Canned Fruits"));
-    list->getItem(0)->completeItem();
-    assignAisles(list, store);
-    cout << "Print Ascending Aisles: " << endl;
+//    list->addItem(GroceryItem("Tomato Soup", "Soups"));
+//    list->addItem(GroceryItem("Sour Patch Kids", "Candy"));
+//    list->addItem(GroceryItem("AA Batteries", "Batteries"));
+//    list->addItem(GroceryItem("Pears", "Canned Fruits"));
+//    list->getItem(0)->completeItem();
+   // assignAisles(list, store);
     //cout << "Returned category number: " << selectCategory(allCategories, store->getNumAllCategories()) << endl;
     delete[] allCategories;
-    printListAscendingAisles(list, store);
     return 0;
 }
