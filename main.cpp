@@ -1,14 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include "GroceryStore.h"
 #include "GroceryList.h"
 
 using namespace std;
 
 void printAsciiHeader(){
-    string header = "\nOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOo\n"
+    string header =
+            "\nOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOo\n"
             "8                                                                                                                8\n"
             "8      /$$$$$$            /$$           /$$        /$$$$$$  /$$                                                  8\n"
             "0     /$$__  $$          |__/          | $$       /$$__  $$| $$                                                  0\n"
@@ -284,7 +284,7 @@ int main() {
         //do-while loop, display the menu atleast once
         cout << "\nWhat would you like to do?" << endl;
         cout << "1) Add Grocery Item to list" << endl;
-        cout << "2) Remove Grocery Item to list" << endl;
+        cout << "2) Remove Grocery Item from list" << endl;
         cout << "3) Change stores" << endl;
         cout << "4) Shopping mode" << endl;
         cout << "5) Exit\n" << endl;
@@ -301,11 +301,17 @@ int main() {
             }else if(userMenuOption == "2"){
                 //remove grocery item from list
             }else if(userMenuOption == "3"){
+                delete store;
+                cout << "Enter store filename to load: ";
+                string inputFileName;
+                cin >> inputFileName;
+                store = loadStoreFromFile("stores/" + inputFileName + ".qss");
+                assignAisles(list, store);
                 //change stores
             }else if(userMenuOption == "4"){
                 //shopping mode
             }else if(userMenuOption == "5"){
-                cout << "Terminating..." << endl;
+                cout << "Quitting...Good Bye" << endl;
             }else{
                 cout << "Invalid Option Entered, Try Again!" << endl;
             }
