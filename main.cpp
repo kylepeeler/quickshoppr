@@ -320,22 +320,7 @@ int main() {
             cout << "Invalid Option Entered, Try Again!" << endl;
         }
     }while (userMenuOption != "5");
-
-
-
-
-//    cout << " QUICKSORTED Listing Categories: " << endl;
-//    for (int i = 0; i < store->getNumAllCategories(); i++){
-//        cout << "Category[" << i << "]: " << allCategories[i] << endl;
-//    }
-//    cout << store->toString() << endl;
-//    list->addItem(GroceryItem("Tomato Soup", "Soups"));
-//    list->addItem(GroceryItem("Sour Patch Kids", "Candy"));
-//    list->addItem(GroceryItem("AA Batteries", "Batteries"));
-//    list->addItem(GroceryItem("Pears", "Canned Fruits"));
-//    list->getItem(0)->completeItem();
-   // assignAisles(list, store);
-    //cout << "Returned category number: " << selectCategory(allCategories, store->getNumAllCategories()) << endl;
+    
     delete[] allCategories;
     return 0;
 }
