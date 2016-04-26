@@ -306,6 +306,7 @@ int main() {
                 string inputFileName;
                 cin >> inputFileName;
                 store = loadStoreFromFile("stores/" + inputFileName + ".qss");
+                allCategories = store->getAllCategories();
                 assignAisles(list, store);
                 //change stores
             }else if(userMenuOption == "4"){
