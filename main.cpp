@@ -286,7 +286,7 @@ int main() {
         cout << "1) Add Grocery Item to list" << endl;
         cout << "2) Remove Grocery Item from list" << endl;
         cout << "3) Change stores" << endl;
-        cout << "4) Shopping mode" << endl;
+        cout << "4) Complete Item" << endl;
         cout << "5) Exit\n" << endl;
         //prompt user to enter an option according to menu
         cout << "Please select an option : ";
@@ -300,6 +300,12 @@ int main() {
                 assignAisles(list, store);
             }else if(userMenuOption == "2"){
                 //remove grocery item from list
+                cout << "Your added items: " << endl;
+                cout << list->toString() << endl;
+                cout << "Which item would you like to remove? (Enter number in brackets): " ;
+                int removeIndex;
+                cin >> removeIndex;
+                list->removeItem(removeIndex - 1);
             }else if(userMenuOption == "3"){
                 delete store;
                 cout << "Enter store filename to load: ";
@@ -307,10 +313,18 @@ int main() {
                 cin >> inputFileName;
                 store = loadStoreFromFile("stores/" + inputFileName + ".qss");
                 allCategories = store->getAllCategories();
+                quickSortStr(allCategories, 0, (store->getNumAllCategories() - 1));
                 assignAisles(list, store);
                 //change stores
             }else if(userMenuOption == "4"){
                 //shopping mode
+                //remove grocery item from list
+                cout << "Your items: " << endl;
+                cout << list->toString() << endl;
+                cout << "Which item would you like to complete? (Enter number in brackets): " ;
+                int completeIndex;
+                cin >> completeIndex;
+                list->getItem(completeIndex - 1)->completeItem();
             }else if(userMenuOption == "5"){
                 cout << "Quitting...Good Bye" << endl;
             }else{

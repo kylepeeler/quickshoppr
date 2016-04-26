@@ -6,12 +6,12 @@ Baby Food,3
 Baking Needs,10
 Bar Soap,1
 Bathroom Tissue,12
-Batteries,F
+Batteries,17
 Beans-Canned,9
 Beans-Dried,8
-Beer,D
+Beer,18
 Bleach,13
-Books/Magazines,F
+Books/Magazines,17
 Bread,6
 Bread Crumbs,10
 Cake Mix,10
@@ -20,39 +20,41 @@ Candy,5
 Canned Milk,10
 Canning Supplies,13
 Cereal,5
-Cherries-Maraschino,F
+Cherries-Maraschino,17
 Chili-Canned,7
 Chinese Food,9
-Chocolate Syrup,F
+Chocolate Syrup,17
 Cleaners,13
 Coffee,6
 Cookies,4
 Cornmeal,10
-Cosmetics,P
+Cosmetics,19
 Crackers,4
-Dairy,D
+Dairy,18
+Eggs, 18
 Detergent/Laundry,13
 Diapers,3
-Dietary Foods,P
+Dietary Foods,19
 Dish Soap,13
 Dried Fruits,10
 Drinks/Powdered,16
 Extracts,10
 Facial Tissue,12
-Film,F
+Film,17
 Fish-Canned,7
 Flour,10
 French Fried Onions,7
-Frozen Food,D
+Frozen Food,18
+Fresh Fruit, 1
 Fruit-Canned,7
 Gelatin/Pudding,10
 Gravy,7
 Greeting Cards,2
 Hardware,13
-Health/Beauty Aids,P
+Health/Beauty Aids,19
 Honey,6
 Hot Chocolate,6
-Ice Cream Toppings,F
+Ice Cream Toppings,17
 Jams/Jellies,6
 Juices,3
 Ketchup & Mustard,8
@@ -79,9 +81,9 @@ Potatoes-Instant,7
 Rice,9
 Salad Dressing,8
 Salt,10
-Sanitary Napkins,P
+Sanitary Napkins,19
 Scouring Pads,13
-Shampoo,P
+Shampoo,19
 Snack Nuts,14
 Soap,13
 Soft Drinks,15
@@ -97,13 +99,13 @@ Tea,6
 Tomato Sauce,7
 Toothpicks,12
 Trash Bags,12
-Vacuum Bags,F
+Vacuum Bags,17
 Vegetable Oil,10
 Vegetables-Canned,7
 Vinegar,8
 Water-Bottled,16
-Water Softener,F
+Water Softener,17
 Waxed Paper,12
 Waxes/Polish,13
-Wine,D
+Wine,18
 Yeast,10

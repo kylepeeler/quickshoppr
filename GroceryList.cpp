@@ -101,9 +101,9 @@ string GroceryList::toString() {
     //loop through the items and concatinate the item with a newline
     string output;
     output = "Number of Items: " + to_string(numItems) + "\n";
-    output += "Store: " + this->getGroceryStore().toString() + "\n";
+//    output += "Store: " + this->getGroceryStore().toString() + "\n";
     for (int i = 0; i < numItems; i++){
-        output += "ListItem[" + std::to_string(i) + "]:" + this->getItem(i)->toString() + "\n";
+        output += "[" + std::to_string(i + 1) + "]:" + this->getItem(i)->toString() + "\n";
     }
     return output;
 }
