@@ -13,6 +13,32 @@ Beer,18
 Bleach,13
 Books/Magazines,17
 Bread,6
+Honey,6
+Hot Chocolate,6
+Ice Cream Toppings,17
+Jams/Jellies,6
+Juices,3
+Ketchup & Mustard,8
+Kosher Foods,9
+Laundry Supplies,13
+Light Bulbs,12
+Lotions,1
+Matches,12
+Mayonnaise,8
+Meat-Canned,7
+Mexican Foods,9
+Nuts/Baking,10
+Olives,8
+Pancake Mix,5
+Paper Products,12
+Pasta,9
+Peanut Butter,6
+Pet Food,11
+Pickles,8
+Picnic Supplies,12
+Plastic Bags,12
+Potato Chips,14
+Potatoes-Instant,7
 Bread Crumbs,10
 Cake Mix,10
 Candles,13
@@ -45,39 +71,13 @@ Fish-Canned,7
 Flour,10
 French Fried Onions,7
 Frozen Food,18
-Fresh Fruit, 1
+Fresh Fruit, 2
 Fruit-Canned,7
 Gelatin/Pudding,10
 Gravy,7
 Greeting Cards,2
 Hardware,13
 Health/Beauty Aids,19
-Honey,6
-Hot Chocolate,6
-Ice Cream Toppings,17
-Jams/Jellies,6
-Juices,3
-Ketchup & Mustard,8
-Kosher Foods,9
-Laundry Supplies,13
-Light Bulbs,12
-Lotions,1
-Matches,12
-Mayonnaise,8
-Meat-Canned,7
-Mexican Foods,9
-Nuts/Baking,10
-Olives,8
-Pancake Mix,5
-Paper Products,12
-Pasta,9
-Peanut Butter,6
-Pet Food,11
-Pickles,8
-Picnic Supplies,12
-Plastic Bags,12
-Potato Chips,14
-Potatoes-Instant,7
 Rice,9
 Salad Dressing,8
 Salt,10
@@ -101,6 +101,7 @@ Toothpicks,12
 Trash Bags,12
 Vacuum Bags,17
 Vegetable Oil,10
+Vegetables, 1
 Vegetables-Canned,7
 Vinegar,8
 Water-Bottled,16

@@ -19,8 +19,6 @@ public:
     GroceryAisle();
     //constructor with aisle number
     GroceryAisle(int aisleNum);
-    //overloaded constructor for 'special' aisles ie front, dairy, pharmacy
-    GroceryAisle(bool isSpecial);
     //constructor with aisle number and number of categories
     GroceryAisle(int aisleNum, int numberOfCategories);
     //copy constructor
