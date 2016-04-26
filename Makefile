@@ -9,7 +9,7 @@ GroceryItem.o: GroceryItem.cpp GroceryItem.h
 GroceryList.o: GroceryList.cpp GroceryList.h
 	g++ -c -g GroceryList.cpp
 main.o: main.cpp GroceryStore.h
-	g++ -c -g main.cpp
+	g++ -c -g -std=c++11 main.cpp
 clean:
 	rm -f *.o
 	rm quickshoppr

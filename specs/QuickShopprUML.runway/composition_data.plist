@@ -27,9 +27,9 @@
 					MDBcdHgzMzYwXHR4MzkyMFx0eDQ0ODBcdHg1
 					MDQwXHR4NTYwMFx0eDYxNjBcdHg2NzIwXHBh
 					cmRpcm5hdHVyYWxccGFydGlnaHRlbmZhY3Rv
-					cjAKClxmMFxmczI4IFxjZjAgXHVwMCBpdGVt
-					czogW11Hcm9jZXJ5SXRlbVwKc3RvcmU6IEdy
-					b2NlcnlTdG9yZX0=
+					cjAKClxmMFxmczI4IFxjZjAgaXRlbXM6IFtd
+					R3JvY2VyeUl0ZW1cCnN0b3JlOiBHcm9jZXJ5
+					U3RvcmV9
 					</data>
 					<key>attributedText2Data</key>
 					<data>
@@ -42,13 +42,13 @@
 					MDBcdHgzMzYwXHR4MzkyMFx0eDQ0ODBcdHg1
 					MDQwXHR4NTYwMFx0eDYxNjBcdHg2NzIwXHBh
 					cmRpcm5hdHVyYWxccGFydGlnaHRlbmZhY3Rv
-					cjAKClxmMFxmczI4IFxjZjAgXHVwMCBhZGRJ
-					dGVtKEdyb2NlcnlJdGVtIGl0ZW0pOiB2b2lk
-					XApyZW1vdmVJdGVtKGludCBpbmRleCk6IGlu
-					dCBzdGF0dXNDb2RlXApzZXRTdG9yZShHcm9j
-					ZXJ5U3RvcmUgc3RvcmUpOiBpbnQgc3RhdHVz
-					Q29kZVwKZ2V0U3RvcmUoKTogR3JvY2VyeVN0
-					b3JlXAp9
+					cjAKClxmMFxmczI4IFxjZjAgYWRkSXRlbShH
+					cm9jZXJ5SXRlbSBpdGVtKTogdm9pZFwKcmVt
+					b3ZlSXRlbShpbnQgaW5kZXgpOiBpbnQgc3Rh
+					dHVzQ29kZVwKc2V0U3RvcmUoR3JvY2VyeVN0
+					b3JlIHN0b3JlKTogaW50IHN0YXR1c0NvZGVc
+					CmdldFN0b3JlKCk6IEdyb2NlcnlTdG9yZVwK
+					fQ==
 					</data>
 					<key>attributedTextData</key>
 					<data>
@@ -175,9 +175,9 @@
 					MDBcdHgzMzYwXHR4MzkyMFx0eDQ0ODBcdHg1
 					MDQwXHR4NTYwMFx0eDYxNjBcdHg2NzIwXHBh
 					cmRpcm5hdHVyYWxccGFydGlnaHRlbmZhY3Rv
-					cjAKClxmMFxmczI4IFxjZjAgXHVwMCBuYW1l
-					OiBTdHJpbmdcCmNhdGVnb3J5OiBTdHJpbmdc
-					CmNvbXBsZXRlZDogQm9vbGVhbn0=
+					cjAKClxmMFxmczI4IFxjZjAgbmFtZTogU3Ry
+					aW5nXApjYXRlZ29yeTogU3RyaW5nXApjb21w
+					bGV0ZWQ6IEJvb2xlYW59
 					</data>
 					<key>attributedText2Data</key>
 					<data>
@@ -190,10 +190,10 @@
 					MDBcdHgzMzYwXHR4MzkyMFx0eDQ0ODBcdHg1
 					MDQwXHR4NTYwMFx0eDYxNjBcdHg2NzIwXHBh
 					cmRpcm5hdHVyYWxccGFydGlnaHRlbmZhY3Rv
-					cjAKClxmMFxmczI4IFxjZjAgXHVwMCBjb21w
-					bGV0ZUl0ZW0oKVwKc2V0TmFtZSgpXApnZXRO
-					YW1lKClcCnNldENhdGVnb3J5KClcCmdldENh
-					dGVnb3J5KClcCn0=
+					cjAKClxmMFxmczI4IFxjZjAgY29tcGxldGVJ
+					dGVtKClcCnNldE5hbWUoKVwKZ2V0TmFtZSgp
+					XApzZXRDYXRlZ29yeSgpXApnZXRDYXRlZ29y
+					eSgpXAp9
 					</data>
 					<key>attributedTextData</key>
 					<data>
@@ -320,10 +320,10 @@
 					MDBcdHgzMzYwXHR4MzkyMFx0eDQ0ODBcdHg1
 					MDQwXHR4NTYwMFx0eDYxNjBcdHg2NzIwXHBh
 					cmRpcm5hdHVyYWxccGFydGlnaHRlbmZhY3Rv
-					cjAKClxmMFxmczI4IFxjZjAgXHVwMCBzdG9y
-					ZU5hbWU6IFN0cmluZ1wKbnVtSXNsZXM6IGlu
-					dFwKY2F0ZWdvcmllczogW251bUlzbGVzXVtd
-					IFN0cmluZ30=
+					cjAKClxmMFxmczI4IFxjZjAgc3RvcmVOYW1l
+					OiBTdHJpbmdcCm51bUlzbGVzOiBpbnRcCmNh
+					dGVnb3JpZXM6IFtudW1Jc2xlc11bXSBTdHJp
+					bmd9
 					</data>
 					<key>attributedText2Data</key>
 					<data>
@@ -336,15 +336,15 @@
 					MDBcdHgzMzYwXHR4MzkyMFx0eDQ0ODBcdHg1
 					MDQwXHR4NTYwMFx0eDYxNjBcdHg2NzIwXHBh
 					cmRpcm5hdHVyYWxccGFydGlnaHRlbmZhY3Rv
-					cjAKClxmMFxmczI4IFxjZjAgXHVwMCBsaXN0
-					Q2F0ZWdvcmllcyhhaXNsZTogaW50KTogU3Ry
-					aW5nW11cCmxpc3RBbGxDYXRlZ29yaWVzKCk6
-					IFN0cmluZ1tdXAphc3NpZ25DYXRlZ29yeVRv
-					KGFpc2xlOiBpbnQpOiB2b2lkXApzZXRTdG9y
-					ZU5hbWUobmFtZTogU3RyaW5nKTogdm9pZFwK
-					Z2V0U3RvcmVOYW1lKCk6IFN0cmluZ1wKc2V0
-					TnVtQWlzbGVzKGludCBudW1BaXNsZXMpOiB2
-					b2lkXApnZXROdW1BaXNsZXMoKTogSW50XAp9
+					cjAKClxmMFxmczI4IFxjZjAgbGlzdENhdGVn
+					b3JpZXMoYWlzbGU6IGludCk6IFN0cmluZ1td
+					XApsaXN0QWxsQ2F0ZWdvcmllcygpOiBTdHJp
+					bmdbXVwKYXNzaWduQ2F0ZWdvcnlUbyhhaXNs
+					ZTogaW50KTogdm9pZFwKc2V0U3RvcmVOYW1l
+					KG5hbWU6IFN0cmluZyk6IHZvaWRcCmdldFN0
+					b3JlTmFtZSgpOiBTdHJpbmdcCnNldE51bUFp
+					c2xlcyhpbnQgbnVtQWlzbGVzKTogdm9pZFwK
+					Z2V0TnVtQWlzbGVzKCk6IEludFwKfQ==
 					</data>
 					<key>attributedTextData</key>
 					<data>
@@ -1349,7 +1349,7 @@
 			<key>scaleImage</key>
 			<true/>
 			<key>scrollCenterPoint</key>
-			<string>{526, 194.5}</string>
+			<string>{526, 194}</string>
 			<key>strokeColor</key>
 			<string>0.000000:0.000000:0.000000:1.000000</string>
 			<key>strokeLineCap</key>

@@ -2,6 +2,7 @@
 // Created by kpeel on 4/13/2016.
 //
 #include <iostream>
+#include <sstream>
 #include "GroceryAisle.h"
 
 using namespace std;
@@ -157,10 +158,16 @@ string* GroceryAisle::getCategories(){
     return this->categories;
 }
 
+string GroceryAisle::itostr(int i){
+    std::stringstream ss;
+    ss << i;
+    return ss.str();
+}
+
 string GroceryAisle::toString() {
     //the string
     string output;
-    output = "Aisle[" + to_string(this->getAisleNum()) + "]-> Categories(" + to_string(this->getNumCategories()) + "): ";
+    output = "Aisle[" + itostr(this->getAisleNum()) + "]-> Categories(" + itostr(this->getNumCategories()) + "): ";
     //loop through categories and concatenate it to output
     for (int i = 0; i < this->getNumCategories(); i++){
         //concatenate the category to output string

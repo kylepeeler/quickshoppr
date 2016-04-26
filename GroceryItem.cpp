@@ -2,6 +2,7 @@
 // Created by kpeel on 4/13/2016.
 //
 
+#include <sstream>
 #include "GroceryItem.h"
 
 using namespace std;
@@ -90,9 +91,15 @@ int GroceryItem::getAisleNumber()const {
     return this->aisleNum;
 }
 
+string GroceryItem::itostr(int i) const{
+    std::stringstream ss;
+    ss << i;
+    return ss.str();
+}
+
 std::string GroceryItem::getAisleNumberStr() const{
     int aisleNumber = this->getAisleNumber();
-    std::string aisleNumberString = std::to_string(aisleNumber);
+    std::string aisleNumberString = itostr(aisleNumber);
     return aisleNumberString;
 }
 
@@ -107,6 +114,8 @@ std::string GroceryItem::toString() {
         return "Item: " + this->getName() + " (" + this->getCategory() + "): completed? \u2718";
     }
 }
+
+
 
 
 

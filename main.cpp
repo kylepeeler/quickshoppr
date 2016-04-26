@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 #include "GroceryStore.h"
 #include "GroceryList.h"
 
@@ -23,8 +24,16 @@ void printAsciiHeader(){
             "8                                                                              |__/      |__/                    8\n"
             "0                                                                                                                0\n"
             "OoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo0OoOoOoOo\n";
-    cout << header << endl;
+    string header2 = "________        .__        __      _________.__                                \n"
+            "\\_____  \\  __ __|__| ____ |  | __ /   _____/|  |__   ____ ______ _____________ \n"
+            " /  / \\  \\|  |  \\  |/ ___\\|  |/ / \\_____  \\ |  |  \\ /  _ \\\\____ \\\\____ \\_  __ \\\n"
+            "/   \\_/.  \\  |  /  \\  \\___|    <  /        \\|   Y  (  <_> )  |_> >  |_> >  | \\/\n"
+            "\\_____\\ \\_/____/|__|\\___  >__|_ \\/_______  /|___|  /\\____/|   __/|   __/|__|   \n"
+            "       \\__>             \\/     \\/        \\/      \\/       |__|   |__|          ";
+    cout << header2 << endl;
 }
+
+
 
 int parseNumAisles(string fileName){
     int maxAisleNumber = -1;
@@ -253,21 +262,44 @@ void addItemToList(GroceryList* list, GroceryStore* store, string* categories){
 int main() {
     GroceryStore* store = loadStoreFromFile("stores/Marsh.qss");
     GroceryList* list = new GroceryList(store);
-//    cout << store->toString() << endl;
-//    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
-//    int aisleNumWithTea = store->lookupAisleByCategory("Tea");
-//    cout << "Removing 'Tea' in aisle: " << aisleNumWithTea << "......";
-//    cout << store->getAisle(aisleNumWithTea)->removeCategory("Tea") << endl;
-//    cout << "Aisle containing 'Tea': " << store->lookupAisleByCategory("Tea") << endl;
-//    cout << "Aisle 1 empty? " << store->getAisle(1)->isAisleEmpty() << endl;
-//    cout << "Aisle 1 number:" << store->getAisle(1)->getAisleNum() << endl;
-    //allocate the categories array on heap, make sure to free!!!
     string * allCategories = store->getAllCategories();
-    //cout << " Unsorted Listing Categories: " << endl;
+
     quickSortStr(allCategories, 0, (store->getNumAllCategories() - 1));
 
     //save the user's entered menu option
     string userMenuOption;
+    struct Menu {
+        void addItem(GroceryStore* store, GroceryList* list, string* allCategories){
+            addItemToList(list, store, allCategories);
+            assignAisles(list, store);
+        };
+        void removeItem(GroceryStore* store, GroceryList* list, string * allCategories){
+            cout<<"TODO: Implement me";
+        };
+        void changeStores(GroceryStore* store, GroceryList* list, string * allCategories){
+            delete store;
+            cout << "Enter store filename to load: ";
+            string inputFileName;
+            cin >> inputFileName;
+            store = loadStoreFromFile("stores/" + inputFileName + ".qss");
+            assignAisles(list, store);
+        };
+        void shoppingMode(GroceryStore* store, GroceryList* list, string * allCategories){
+            cout<<"TODO: Implement ME";
+        };
+        void quit(GroceryStore* store, GroceryList* list, string * allCategories){
+            cout << "Quitting...Good Bye" << endl;
+        };
+    };
+    typedef void (Menu::*menuOptions)(GroceryStore*, GroceryList*, string*);
+    map<string, menuOptions> menuMap = {
+            {"1",&Menu::addItem},
+            {"2", &Menu::removeItem},
+            {"3",&Menu::changeStores},
+            {"4",&Menu::shoppingMode},
+            {"5",&Menu::quit}
+    };
+
     do {
         printAsciiHeader();
         cout << "Loaded Store Name: " << store->getStoreName() << endl;
@@ -292,26 +324,14 @@ int main() {
         cout << "Please select an option : ";
         //clean out cin to remove previous values
         cin.clear();
-        cin >> userMenuOption; //take option value as input and save it
+        cin >> userMenuOption;
+        //take option value as input and save it
         if (cin.good()){
-            if (userMenuOption == "1"){
-                //add grocery item to list
-                addItemToList(list, store, allCategories);
-                assignAisles(list, store);
-            }else if(userMenuOption == "2"){
-                //remove grocery item from list
-            }else if(userMenuOption == "3"){
-                delete store;
-                cout << "Enter store filename to load: ";
-                string inputFileName;
-                cin >> inputFileName;
-                store = loadStoreFromFile("stores/" + inputFileName + ".qss");
-                assignAisles(list, store);
-                //change stores
-            }else if(userMenuOption == "4"){
-                //shopping mode
-            }else if(userMenuOption == "5"){
-                cout << "Quitting...Good Bye" << endl;
+            if(menuMap.find(userMenuOption) != menuMap.end()){
+                Menu m;
+                //second returns value, first is key
+                (m.*(menuMap.find(userMenuOption)->second))(store, list, allCategories);
+
             }else{
                 cout << "Invalid Option Entered, Try Again!" << endl;
             }
@@ -323,17 +343,17 @@ int main() {
 
 
 
-//    cout << " QUICKSORTED Listing Categories: " << endl;
-//    for (int i = 0; i < store->getNumAllCategories(); i++){
-//        cout << "Category[" << i << "]: " << allCategories[i] << endl;
-//    }
-//    cout << store->toString() << endl;
-//    list->addItem(GroceryItem("Tomato Soup", "Soups"));
-//    list->addItem(GroceryItem("Sour Patch Kids", "Candy"));
-//    list->addItem(GroceryItem("AA Batteries", "Batteries"));
-//    list->addItem(GroceryItem("Pears", "Canned Fruits"));
-//    list->getItem(0)->completeItem();
-   // assignAisles(list, store);
+    //cout << " QUICKSORTED Listing Categories: " << endl;
+    //for (int i = 0; i < store->getNumAllCategories(); i++){
+    //    cout << "Category[" << i << "]: " << allCategories[i] << endl;
+    //}
+    //cout << store->toString() << endl;
+    //list->addItem(GroceryItem("Tomato Soup", "Soups"));
+    //list->addItem(GroceryItem("Sour Patch Kids", "Candy"));
+    //list->addItem(GroceryItem("AA Batteries", "Batteries"));
+    //list->addItem(GroceryItem("Pears", "Canned Fruits"));
+    //list->getItem(0)->completeItem();
+    //assignAisles(list, store);
     //cout << "Returned category number: " << selectCategory(allCategories, store->getNumAllCategories()) << endl;
     delete[] allCategories;
     return 0;

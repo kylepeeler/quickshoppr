@@ -2,6 +2,7 @@
 // Created by Kyle A Peeler on 4/17/16.
 //
 
+#include <sstream>
 #include "GroceryList.h"
 
 using namespace std;
@@ -95,15 +96,22 @@ GroceryStore GroceryList::getGroceryStore() {
     return this->store;
 }
 
+string GroceryList::itostr(int i) const{
+    std::stringstream ss;
+    ss << i;
+    return ss.str();
+}
+
+
 string GroceryList::toString() {
     //get the number of items in the list
     int numItems = this->getNumItems();
     //loop through the items and concatinate the item with a newline
     string output;
-    output = "Number of Items: " + to_string(numItems) + "\n";
+    output = "Number of Items: " + itostr(numItems) + "\n";
     output += "Store: " + this->getGroceryStore().toString() + "\n";
     for (int i = 0; i < numItems; i++){
-        output += "ListItem[" + std::to_string(i) + "]:" + this->getItem(i)->toString() + "\n";
+        output += "ListItem[" + itostr(i) + "]:" + this->getItem(i)->toString() + "\n";
     }
     return output;
 }

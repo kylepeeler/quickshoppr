@@ -26,6 +26,7 @@ public:
     void setStore(GroceryStore* store);
     GroceryStore getGroceryStore();
     std::string toString();
+    std::string itostr(int i) const;
 };
 
 

@@ -35,6 +35,7 @@ public:
     int getNumAllCategories();
     std::string* getAllCategories();
     std::string toString();
+    std::string itostr(int i);
 };
 
 

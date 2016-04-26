@@ -44,6 +44,8 @@ public:
     std::string getCompletionStatusStr() const;
     void completeItem();
     std::string toString();
+    std::string itostr(int i) const;
+
 };
 
 

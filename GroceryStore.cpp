@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "GroceryStore.h"
 
 using namespace std;
@@ -26,6 +27,15 @@ GroceryStore::GroceryStore(std::string storeName, int numAisles){
 GroceryStore::~GroceryStore() {
     delete[] aisles;
 }
+
+
+
+string GroceryStore::itostr(int i){
+    std::stringstream ss;
+    ss << i;
+    return ss.str();
+}
+
 
 string GroceryStore::getStoreName(){
     return this->storeName;
@@ -83,7 +93,7 @@ bool GroceryStore::assignCategoryToAisle(std::string category, int aisleNum){
 string GroceryStore::toString() {
     string output;
     output = "Store Name: " + this->getStoreName() + "\n";
-    output += "Number of Aisles: " + to_string(this->getNumAisles()) + "\n";
+    output += "Number of Aisles: " + itostr(this->getNumAisles()) + "\n";
     output += "Aisle Data: \n";
     int numberOfCategories = 0;
     //get number of aisles in the store
@@ -94,11 +104,12 @@ string GroceryStore::toString() {
             output += this->aisles[i].toString() + "\n";
             numberOfCategories += this->aisles[i].getNumCategories();
         }else{
-            output += "Aisle[" + to_string(i+1) + "]-> is empty!\n";
+            output += "Aisle[" + itostr(i+1) + "]-> is empty!\n";
         }
     }
     //return the whole string
-    //cout << "Number of Categories: " << numberOfCategories << endl;
+    //
+    // cout << "Number of Categories: " << numberOfCategories << endl;
     return output;
 }
 

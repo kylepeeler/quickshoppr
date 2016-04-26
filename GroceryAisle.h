@@ -42,6 +42,7 @@ public:
     bool removeCategory(std::string category);//returns false if category is not found, true if the category was removed successfully
     std::string* getCategories();
     bool hasCategory(std::string category);//returns true if contains category, if it doesn't returns false
+    std::string itostr(int i);
     std::string toString();
 };
 
